@@ -1,3 +1,5 @@
+
+
 async function getpapers() {
   try {
       const response = await fetch('https://serpapi.com/search.json?engine=google_scholar&q=author:armin%20nabizadeh&api_key=56e6ee3f4a7f850c0076ad10c14bdcc31e0371c82ecd04e7a5630e377a9a5754');
@@ -25,4 +27,18 @@ async function getpapers() {
       console.error("Error fetching the data:", error);
   }
 }
-getpapers();
+
+const SerpApi = require('google-search-results-nodejs');
+const search = new SerpApi.GoogleSearch("56e6ee3f4a7f850c0076ad10c14bdcc31e0371c82ecd04e7a5630e377a9a5754");
+
+const params = {
+  engine: "google_scholar",
+  q: "author:armin nabizadeh"
+};
+
+const callback = function(data) {
+  console.log(data["organic_results"]);
+};
+
+// Show result as JSON
+search.json(params, callback);
